@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'weather_service.dart';
 import 'forecast_page.dart';
+import 'notification_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.initialize();
   runApp(MyApp());
 }
 
@@ -48,7 +51,15 @@ class _HomePageState extends State<HomePage> {
         _errorMessage = 'Error fetching weather data';
       });
     }
+    await NotificationService.showDailyNotification(
+      id: 0,
+      title: 'Weather Update',
+      body: 'Current temperature in $_cityName: $_temperature°C',
+      scheduledTime: TimeOfDay(hour: 21, minute: 13),
+    );
+
   }
+
 
   void _navigateToForecast() {
     if (_cityName.isNotEmpty) {

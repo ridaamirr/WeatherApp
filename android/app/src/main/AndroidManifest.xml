@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
         android:label="weatherapp"
         android:name="${applicationName}"
@@ -29,6 +30,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.ActionBroadcastReceiver" android:exported="true"/>
+        <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.DismissedReceiver" android:exported="true"/>
+        <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.NotificationBroadcastReceiver" android:exported="true"/>
+        <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.ReplyBroadcastReceiver" android:exported="true"/>
+        <service android:name="com.dexterous.flutterlocalnotifications.isolate.IsolateService" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="true"/>
+
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility?hl=en and
